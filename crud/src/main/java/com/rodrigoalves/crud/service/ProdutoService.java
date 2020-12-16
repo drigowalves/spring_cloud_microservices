@@ -3,6 +3,7 @@ package com.rodrigoalves.crud.service;
 import com.rodrigoalves.crud.data.vo.ProdutoVO;
 import com.rodrigoalves.crud.entity.Produto;
 import com.rodrigoalves.crud.exceptions.ResourseNotFoundException;
+import com.rodrigoalves.crud.message.ProdutoCreateSendMessage;
 import com.rodrigoalves.crud.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Service
@@ -18,10 +18,12 @@ import java.util.Optional;
 public class ProdutoService {
 
     private final ProdutoRepository produtoRepository;
+    private final ProdutoCreateSendMessage produtoSendMessage;
 
     public ProdutoVO create(ProdutoVO produtoVO) {
-        Produto produto = produtoRepository.save(Produto.create(produtoVO));
-        return ProdutoVO.create(produto);
+        ProdutoVO newProdutoVO = ProdutoVO.create(produtoRepository.save(Produto.create(produtoVO)));
+        produtoSendMessage.sendMessage(newProdutoVO);
+        return newProdutoVO;
     }
 
     public Page<ProdutoVO> findAll(Pageable pageable) {

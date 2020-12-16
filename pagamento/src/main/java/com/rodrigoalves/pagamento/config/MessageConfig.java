@@ -1,4 +1,4 @@
-package com.rodrigoalves.crud.config;
+package com.rodrigoalves.pagamento.config;
 
 import org.springframework.amqp.core.Exchange;
 import org.springframework.amqp.core.ExchangeBuilder;

@@ -10,14 +10,28 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class MessageCreateConfig {
+public class MessageConfig {
 
     @Value("${crud.rabbitmq.exchange.create}")
-    String exchange;
+    String exchangeCreate;
+    @Value("${crud.rabbitmq.exchange.update}")
+    String exchangeUpdate;
+    @Value("${crud.rabbitmq.exchange.delete}")
+    String exchangeDelete;
 
     @Bean
-    public Exchange declareExchange() {
-        return ExchangeBuilder.directExchange(exchange).durable(true).build();
+    public Exchange declareExchangeCreate() {
+        return ExchangeBuilder.directExchange(exchangeCreate).durable(true).build();
+    }
+
+    @Bean
+    public Exchange declareExchangeUpdate() {
+        return ExchangeBuilder.directExchange(exchangeUpdate).durable(true).build();
+    }
+
+    @Bean
+    public Exchange declareExchangeDelete() {
+        return ExchangeBuilder.directExchange(exchangeDelete).durable(true).build();
     }
 
     @Bean

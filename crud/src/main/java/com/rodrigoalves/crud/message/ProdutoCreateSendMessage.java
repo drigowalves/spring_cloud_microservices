@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class ProdutoSendMessage {
+public class ProdutoCreateSendMessage {
 
-    @Value("${crud.rabbitmq.exchange}")
+    @Value("${crud.rabbitmq.exchange.create}")
     String exchange;
 
     @Value("${crud.rabbitmq.routingkey}")

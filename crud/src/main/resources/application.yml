@@ -6,6 +6,7 @@ server:
 spring:
   application:
     name: crud
+
   jpa:
     show-sql: false
     hibernate:
@@ -13,9 +14,25 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+
   jmx:
     enabled: false
+
   datasource:
     url: jdbc:mysql://localhost:3310/curso_spring?allowPublicKeyRetrieval=true&sslMode=DISABLED
     username: root
     password: root
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+
+crud:
+  rabbitmq:
+    exchange:
+      create: crud.exchange.create
+      update: crud.exchange.update
+      delete: crud.exchange.delete
+    routingkey: crud.produto.routingkey
